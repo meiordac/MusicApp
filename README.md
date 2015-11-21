@@ -29,3 +29,7 @@ La integración con la base de datos se debe realizar utilizando Entity Framewor
 - EF con WebForms: https://www.asp.net/web-forms/overview/getting-started/getting-started-with-aspnet-45-web-forms/create_the_data_access_layer
 
 - EF con ASP.NET MVC: https://www.asp.net/mvc/overview/getting-started/getting-started-with-ef-using-mvc/creating-an-entity-framework-data-model-for-an-asp-net-mvc-application
+
+# Posibles problemas
+
+- Puede que sea necesario instalar SQLLocalDB desde el siguiente enlace: https://www.microsoft.com/en-us/download/confirmation.aspx?id=42299
