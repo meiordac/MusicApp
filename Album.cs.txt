@@ -1,0 +1,14 @@
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace ContosoUniversity.Models
+{
+    public class Album
+    {
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int AlmbumID { get; set; }
+        public string Name { get; set; }
+        
+        public virtual ICollection<Song> Songs { get; set; }
+    }
+}

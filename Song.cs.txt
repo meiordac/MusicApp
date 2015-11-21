@@ -1,0 +1,16 @@
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace ContosoUniversity.Models
+{
+    public class Song
+    {
+        //[DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int SongID { get; set; }
+	public int ArtistID { get; set; }
+        public int AlbumID { get; set; }
+        public string Name { get; set; }
+	public double Popularity { get; set; }
+        public double Length{ get; set; }
+    }
+}
