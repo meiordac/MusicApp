@@ -30,59 +30,70 @@ namespace MusicApp.Controllers
         // GET: Artists/Create
         public ActionResult Save(Zirpl.Spotify.MetadataApi.Artist artist)
         {
-            //return View();
             List<Zirpl.Spotify.MetadataApi.Album> albums = new List<Zirpl.Spotify.MetadataApi.Album>();
             if (artist.Albums.Count == 0)
                 albums = new SpotifyMetadataApiClient().SearchAlbums(artist.Name).Albums;
-            //Zirpl.Spotify.MetadataApi.Artist artist;
             else
                 albums = artist.Albums;
 
+
             foreach (Zirpl.Spotify.MetadataApi.Album album in albums)
             {
-
-                MusicApp.Models.Album a = new Models.Album();
-                a.Name = album.Name;
-                a.Href = album.Href;
-                //a.Artists = album.Artists;
-                a.ArtistId = album.ArtistId;
-                a.Popularity = album.Popularity;
-                a.Artist = artist.Name;
-                //a.ArtistID = int.Parse(album.ArtistId);
-                SaveAlbum(a);
+                SaveAlbum(album, artist);
             }
-            return RedirectToAction("About");
+
+            List<Zirpl.Spotify.MetadataApi.Track> tracks = new SpotifyMetadataApiClient().SearchTracks(artist.Name).Tracks;
+            foreach (Zirpl.Spotify.MetadataApi.Track track in tracks)
+            {
+                SaveTrack(track, artist);
+            }
+
+
+            return RedirectToAction("Index");
+
         }
 
-
         [HttpPost]
-        public void SaveAlbum(MusicApp.Models.Album newAlbum)
+        public void SaveAlbum(Zirpl.Spotify.MetadataApi.Album album, Zirpl.Spotify.MetadataApi.Artist artist)
         {
+
+            MusicApp.Models.Album a = new Models.Album();
+            a.Name = album.Name;
+            a.Href = album.Href;
+            a.ArtistId = album.ArtistId;
+            a.Popularity = album.Popularity;
+            a.Artist = artist.Name;
+            a.Released = album.Released;
 
             //if (ModelState.IsValid)
             {
-                db.Albums.Add(newAlbum);
+                db.Albums.Add(a);
                 db.SaveChanges();
             }
         }
 
-        // POST: Albums/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        /*
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public void SaveAlbum([Bind(Include = "AlbumID,ArtistID,Name")] MusicApp.Models.Album album)
+        public void SaveTrack(Zirpl.Spotify.MetadataApi.Track track, Zirpl.Spotify.MetadataApi.Artist artist)
         {
-            if (ModelState.IsValid)
+
+            MusicApp.Models.Song s = new Models.Song();
+            s.Name = track.Name;
+            s.Href = track.Href;
+            s.Length = track.Length;
+            s.Href = track.Href;
+            s.ArtistId = artist.Href;
+            s.Popularity = track.Popularity;
+            //s.Artist = artist.Name;
+            //s.Released = track.Released;
+
+            //if (ModelState.IsValid)
             {
-                ViewBag.Message = "Your application description page.";
-                db.Albums.Add(album);
+                db.Songs.Add(s);
                 db.SaveChanges();
-               
             }
         }
-        */
+
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

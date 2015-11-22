@@ -47,7 +47,7 @@ namespace MusicApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "SongID,ArtistID,AlbumID,Name,Popularity,Length")] Song song)
+        public ActionResult Create([Bind(Include = "SongID,AlbumID,Name,Popularity,Length,Href,ArtistId")] Song song)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +79,7 @@ namespace MusicApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "SongID,ArtistID,AlbumID,Name,Popularity,Length")] Song song)
+        public ActionResult Edit([Bind(Include = "SongID,AlbumID,Name,Popularity,Length,Href,ArtistId")] Song song)
         {
             if (ModelState.IsValid)
             {
