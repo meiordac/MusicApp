@@ -7,10 +7,14 @@ namespace MusicApp.Models
 {
     public class Artist
     {
+        public Artist()
+        {
+            Albums = new List<Album>();
+        }
         public int ID { get; set; }
-        public string Name { get; set; }
-        public double Popularity { get; set; }
-
-        public virtual ICollection<Album> Albums { get; set; }
+        public String Href { get; set; }
+        public String Name { get; set; }
+        public String Popularity { get; set; }
+        public List<Album> Albums { get; set; }
     }
 }

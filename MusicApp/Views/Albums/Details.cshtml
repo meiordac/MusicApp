@@ -11,11 +11,11 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.ArtistID)
+            @Html.DisplayNameFor(model => model.Href)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ArtistID)
+            @Html.DisplayFor(model => model.Href)
         </dd>
 
         <dt>
@@ -26,9 +26,41 @@
             @Html.DisplayFor(model => model.Name)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.Popularity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Popularity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Released)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Released)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ArtistId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ArtistId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Artist)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Artist)
+        </dd>
+
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.AlbumID }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
