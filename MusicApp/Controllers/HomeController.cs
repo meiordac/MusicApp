@@ -30,12 +30,12 @@ namespace MusicApp.Controllers
         // GET: Artists/Create
         public ActionResult Save(Zirpl.Spotify.MetadataApi.Artist artist)
         {
+            SaveArtist(artist);
             List<Zirpl.Spotify.MetadataApi.Album> albums = new List<Zirpl.Spotify.MetadataApi.Album>();
             if (artist.Albums.Count == 0)
                 albums = new SpotifyMetadataApiClient().SearchAlbums(artist.Name).Albums;
             else
                 albums = artist.Albums;
-
 
             foreach (Zirpl.Spotify.MetadataApi.Album album in albums)
             {
@@ -48,24 +48,39 @@ namespace MusicApp.Controllers
                 SaveTrack(track, artist);
             }
 
-
             return RedirectToAction("Index");
 
         }
 
         [HttpPost]
+        public void SaveArtist(Zirpl.Spotify.MetadataApi.Artist artist)
+        {
+            MusicApp.Models.Artist a = new Models.Artist();
+            a.Name = artist.Name;
+            a.Href = artist.Href;
+            a.Popularity = artist.Popularity;
+            //if (ModelState.IsValid)
+            {
+                db.Artists.Add(a);
+                db.SaveChanges();
+            }
+        }
+
+
+        [HttpPost]
         public void SaveAlbum(Zirpl.Spotify.MetadataApi.Album album, Zirpl.Spotify.MetadataApi.Artist artist)
         {
-
+            var result = new SpotifyMetadataApiClient().LookupAlbum(album.Href);
             MusicApp.Models.Album a = new Models.Album();
-            a.Name = album.Name;
+            a.Name = result.Name;
             a.Href = album.Href;
-            a.ArtistId = album.ArtistId;
+            a.ArtistId = artist.Href;
             a.Popularity = album.Popularity;
-            a.Artist = artist.Name;
-            a.Released = album.Released;
+            a.Artist = result.Artist;
+            a.Released = result.Released;
 
             //if (ModelState.IsValid)
+            if(result.Artist == artist.Name)
             {
                 db.Albums.Add(a);
                 db.SaveChanges();
@@ -83,8 +98,6 @@ namespace MusicApp.Controllers
             s.Href = track.Href;
             s.ArtistId = artist.Href;
             s.Popularity = track.Popularity;
-            //s.Artist = artist.Name;
-            //s.Released = track.Released;
 
             //if (ModelState.IsValid)
             {

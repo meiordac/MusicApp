@@ -16,9 +16,38 @@ namespace MusicApp.Controllers
         private MusicContext db = new MusicContext();
 
         // GET: Albums
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string searchString)
         {
-            return View(db.Albums.ToList());
+
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.PopuSortParm = String.IsNullOrEmpty(sortOrder) ? "popu_desc" : "";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+            var albums = from s in db.Albums
+                           select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                albums = albums.Where(s => s.Artist.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    albums = albums.OrderByDescending(s => s.Name);
+                    break;
+                case "popu_desc":
+                    albums = albums.OrderByDescending(s => s.Popularity);
+                    break;
+                case "Date":
+                    albums = albums.OrderBy(s => s.Released);
+                    break;
+                case "date_desc":
+                    albums = albums.OrderByDescending(s => s.Released);
+                    break;
+                default:
+                    albums = albums.OrderBy(s => s.Released);
+                    break;
+            }
+
+            return View(albums.ToList());
         }
 
         // GET: Albums/Details/5

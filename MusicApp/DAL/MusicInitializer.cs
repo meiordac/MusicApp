@@ -7,7 +7,7 @@ using MusicApp.Models;
 
 namespace MusicApp.DAL
 {
-    public class MusicInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<MusicContext>
+    public class MusicInitializer : System.Data.Entity.DropCreateDatabaseAlways<MusicContext>
     {
         protected override void Seed(MusicContext context)
         {
