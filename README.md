@@ -12,24 +12,18 @@ La integración con la base de datos se debe realizar utilizando Entity Framewor
 # Requisitos No Funcionales
 
 - Desarrolle su solución en el lenguaje C#
-
 - La base de datos debe ser SQL Server, ya sea Express o LocalDB
-
 - La interfaz gráfica debe ser un sitio Web Forms o ASP.NET MVC, según prefiera
-
 - Puede utilizar las librerías externas que estime convenientes
-
 - Debe subir el código a un repositorio en Github [2] con un README explicativo
 
 [1] https://developer.spotify.com/technologies/metadata-api
 [2] https://github.com
 
-# Recursos para comenzar a desarrollar en Entity Framework
-
-- EF con WebForms: https://www.asp.net/web-forms/overview/getting-started/getting-started-with-aspnet-45-web-forms/create_the_data_access_layer
-
-- EF con ASP.NET MVC: https://www.asp.net/mvc/overview/getting-started/getting-started-with-ef-using-mvc/creating-an-entity-framework-data-model-for-an-asp-net-mvc-application
-
-# Posibles problemas
-
+# Detalles de implementación
+- Se usa ASP.net MVC
 - Puede que sea necesario instalar SQLLocalDB desde el siguiente enlace: https://www.microsoft.com/en-us/download/confirmation.aspx?id=42299
+- DB se resetea cada vez que se corre el app (por esto mismo se demora un poco en iniciar)
+- Si se presiona ordenar por Released cambia el orden entre desc y asc
+- Se usa nuget para manejar la metadata API, necesario ejecutar: Install-Package Zirpl.Spotify.MetadataApi
+- Necesario instalar EF: Install-Package EntityFramework
