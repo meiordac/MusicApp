@@ -9,11 +9,10 @@
 @using (Html.BeginForm())
 {
     <p>
-        Find by artist: @Html.TextBox("SearchString")
+        Find by name: @Html.TextBox("SearchString")
         <input type="submit" value="Search" />
     </p>
 }
-
 <table class="table">
     <tr>
         <th>
@@ -27,6 +26,12 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Artist)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NameLongest)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LengthLongest)
         </th>
         <th></th>
     </tr>
@@ -44,6 +49,12 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Artist)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NameLongest)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LengthLongest)
         </td>
     </tr>
 }

@@ -31,22 +31,31 @@ namespace MusicApp.Controllers
         public ActionResult Save(Zirpl.Spotify.MetadataApi.Artist artist)
         {
             SaveArtist(artist);
+           
+
+            List<Zirpl.Spotify.MetadataApi.Track>tracks = new SpotifyMetadataApiClient().SearchTracks(artist.Name).Tracks;
+            foreach (Zirpl.Spotify.MetadataApi.Track track in tracks)
+            {
+                SaveTrack(track, artist);
+            }
+
+
+            db.SaveChanges();
+
             List<Zirpl.Spotify.MetadataApi.Album> albums = new List<Zirpl.Spotify.MetadataApi.Album>();
             if (artist.Albums.Count == 0)
                 albums = new SpotifyMetadataApiClient().SearchAlbums(artist.Name).Albums;
             else
                 albums = artist.Albums;
 
+   
             foreach (Zirpl.Spotify.MetadataApi.Album album in albums)
             {
+                
                 SaveAlbum(album, artist);
             }
 
-            List<Zirpl.Spotify.MetadataApi.Track> tracks = new SpotifyMetadataApiClient().SearchTracks(artist.Name).Tracks;
-            foreach (Zirpl.Spotify.MetadataApi.Track track in tracks)
-            {
-                SaveTrack(track, artist);
-            }
+            db.SaveChanges();
 
             return RedirectToAction("Index");
 
@@ -62,7 +71,6 @@ namespace MusicApp.Controllers
             //if (ModelState.IsValid)
             {
                 db.Artists.Add(a);
-                db.SaveChanges();
             }
         }
 
@@ -71,6 +79,7 @@ namespace MusicApp.Controllers
         public void SaveAlbum(Zirpl.Spotify.MetadataApi.Album album, Zirpl.Spotify.MetadataApi.Artist artist)
         {
             var result = new SpotifyMetadataApiClient().LookupAlbum(album.Href);
+           
             MusicApp.Models.Album a = new Models.Album();
             a.Name = result.Name;
             a.Href = album.Href;
@@ -79,30 +88,40 @@ namespace MusicApp.Controllers
             a.Artist = result.Artist;
             a.Released = result.Released;
 
+            var songs = from s in db.Songs
+                        select s;
+            songs = songs.Where(s => s.AlbumID.Contains(album.Href));
+
+            if (songs.Count() > 0)
+            {
+                var maxObject = songs.OrderByDescending(item => item.Length).First();
+                a.LengthLongest = maxObject.Length;
+                a.NameLongest = maxObject.Name;
+            }
+
             //if (ModelState.IsValid)
-            if(result.Artist == artist.Name)
+            if (result.Artist == artist.Name)
             {
                 db.Albums.Add(a);
-                db.SaveChanges();
             }
         }
 
         [HttpPost]
         public void SaveTrack(Zirpl.Spotify.MetadataApi.Track track, Zirpl.Spotify.MetadataApi.Artist artist)
         {
-
+            var result = new SpotifyMetadataApiClient().LookupTrack(track.Href);
             MusicApp.Models.Song s = new Models.Song();
             s.Name = track.Name;
             s.Href = track.Href;
             s.Length = track.Length;
             s.Href = track.Href;
-            s.ArtistId = artist.Href;
+            s.ArtistId = result.Artists.First().Href;
+            s.AlbumID = result.Album.Href;
             s.Popularity = track.Popularity;
 
             //if (ModelState.IsValid)
             {
                 db.Songs.Add(s);
-                db.SaveChanges();
             }
         }
 

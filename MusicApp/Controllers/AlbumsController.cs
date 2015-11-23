@@ -16,9 +16,8 @@ namespace MusicApp.Controllers
         private MusicContext db = new MusicContext();
 
         // GET: Albums
-        public ActionResult Index(string sortOrder, string searchString)
+        public ViewResult Index(string sortOrder, string searchString)
         {
-
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.PopuSortParm = String.IsNullOrEmpty(sortOrder) ? "popu_desc" : "";
             ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
@@ -43,7 +42,7 @@ namespace MusicApp.Controllers
                     albums = albums.OrderByDescending(s => s.Released);
                     break;
                 default:
-                    albums = albums.OrderBy(s => s.Released);
+                    albums = albums.OrderByDescending(s => s.Released);
                     break;
             }
 
@@ -76,7 +75,7 @@ namespace MusicApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Href,Name,Popularity,Released,ArtistId,Artist")] Album album)
+        public ActionResult Create([Bind(Include = "ID,Href,Name,Popularity,Released,ArtistId,Artist,NameLongest,LengthLongest")] Album album)
         {
             if (ModelState.IsValid)
             {
@@ -108,7 +107,7 @@ namespace MusicApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Href,Name,Popularity,Released,ArtistId,Artist")] Album album)
+        public ActionResult Edit([Bind(Include = "ID,Href,Name,Popularity,Released,ArtistId,Artist,NameLongest,LengthLongest")] Album album)
         {
             if (ModelState.IsValid)
             {
