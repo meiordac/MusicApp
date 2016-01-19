@@ -1,6 +1,5 @@
 # MusicApp
 
-# MusicApp
 # Description of the problem
  
  The aim is to develop a site that uses the Spotify Metadata API [1] to download information about artists and songs, show certain statistics from this information.
@@ -11,7 +10,7 @@
  
  Integration with the database should be using Entity Framework, and can use the Code-First approach or Database-First, as you prefer. Queries to the database should be performed by means of queries in LINQ.
  
- # Non-functional requirements
+# Non-functional requirements
  
  -Develop your solution in the language C#
  -The database must be SQL Server, either Express or LocalDB
@@ -22,7 +21,7 @@
  [1] https://developer.spotify.com/technologies/metadata-api
  [2] https://github.com/Facebook/connect-js/BLOB/master/examples/jQuery/login.html
  
- # Implementation details
+# Implementation details
  -Using ASP.net MVC
  -May be necessary to install SQLLocalDB from the following link: https://www.microsoft.com/en-us/download/confirmation.aspx?id=42299
  -DB is reset whenever you run the app (this same takes a bit to start)
