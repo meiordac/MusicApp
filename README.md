@@ -11,23 +11,23 @@
  Integration with the database should be using Entity Framework, and can use the Code-First approach or Database-First, as you prefer. Queries to the database should be performed by means of queries in LINQ.
  
 # Non-functional requirements
- 
- -Develop your solution in the language C#
- -The database must be SQL Server, either Express or LocalDB
- -The GUI must be a Web site Forms or ASP.NET MVC, as you prefer
- -You can use the external libraries that it deems fit
- -Must upload the code to a repository on Github [2] with an explanatory README
+
+- Develop your solution in the language C#
+- The database must be SQL Server, either Express or LocalDB
+- The GUI must be a Web site Forms or ASP.NET MVC, as you prefer
+- You can use the external libraries that it deems fit
+- Must upload the code to a repository on Github [2] with an explanatory README
  
  [1] https://developer.spotify.com/technologies/metadata-api
  [2] https://github.com/Facebook/connect-js/BLOB/master/examples/jQuery/login.html
  
 # Implementation details
- -Using ASP.net MVC
- -May be necessary to install SQLLocalDB from the following link: https://www.microsoft.com/en-us/download/confirmation.aspx?id=42299
- -DB is reset whenever you run the app (this same takes a bit to start)
- -If you press sort by Released changes between asc and desc order
- -Nuget is used to manage the metadata API, need to be run: Install-Package Zirpl.Spotify.MetadataApi
- -Need to install EF: Install-Package EntityFramework
+- Using ASP.net MVC
+- May be necessary to install SQLLocalDB from the following link: https://www.microsoft.com/en-us/download/confirmation.aspx?id=42299
+- DB is reset whenever you run the app (this same takes a bit to start)
+- If you press sort by Released it changes between asc and desc order
+- Nuget is used to manage the metadata API, need to be run: Install-Package Zirpl.Spotify.MetadataApi
+- Need to install EF: Install-Package EntityFramework
 
 
 
