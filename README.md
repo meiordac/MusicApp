@@ -1,4 +1,37 @@
 # MusicApp
+
+# MusicApp
+# Description of the problem
+ 
+ The aim is to develop a site that uses the Spotify Metadata API [1] to download information about artists and songs, show certain statistics from this information.
+ 
+ In particular, the user can seek an artist from a text field, which a list of all their albums and themes of each album in the database will be saved.
+ 
+ In addition, are you must to choose one of the artists already downloaded, and show in a list all their albums, sorted by year. For each album from the above list to display average popularity of tracks and the name and length of the longest runway.
+ 
+ Integration with the database should be using Entity Framework, and can use the Code-First approach or Database-First, as you prefer. Queries to the database should be performed by means of queries in LINQ.
+ 
+ # Non-functional requirements
+ 
+ -Develop your solution in the language C#
+ -The database must be SQL Server, either Express or LocalDB
+ -The GUI must be a Web site Forms or ASP.NET MVC, as you prefer
+ -You can use the external libraries that it deems fit
+ -Must upload the code to a repository on Github [2] with an explanatory README
+ 
+ [1] https://developer.spotify.com/technologies/metadata-api
+ [2] https://github.com/Facebook/connect-js/BLOB/master/examples/jQuery/login.html
+ 
+ # Implementation details
+ -Using ASP.net MVC
+ -May be necessary to install SQLLocalDB from the following link: https://www.microsoft.com/en-us/download/confirmation.aspx?id=42299
+ -DB is reset whenever you run the app (this same takes a bit to start)
+ -If you press sort by Released changes between asc and desc order
+ -Nuget is used to manage the metadata API, need to be run: Install-Package Zirpl.Spotify.MetadataApi
+ -Need to install EF: Install-Package EntityFramework
+
+
+
 # Descripción del problema
 
 El objetivo es desarrollar un sitio que utilice la API de Metadata de Spotify [1] para descargar información sobre artistas y canciones, y mostrar ciertas estadísticas de esta información.
